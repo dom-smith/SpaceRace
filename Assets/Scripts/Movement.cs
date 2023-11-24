@@ -35,8 +35,11 @@ public class Movement : MonoBehaviour
 
     Rigidbody rb;
 
+    private Animator animator;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();    
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -56,6 +59,21 @@ public class Movement : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0;
+
+       // moveDirection = new Vector3(horizontalInput, 0, verticalInput);
+
+
+        // Anim
+        if(moveDirection == Vector3.zero)
+        {
+            //Idle
+            animator.SetBool("isMoving", false);
+
+        }
+        else
+        {
+            animator.SetBool("isMoving", true);
+        }
     }
 
     private void FixedUpdate()
